@@ -65,7 +65,8 @@ RUN yum update -y -y \
 	&& rm -fr * \
 	&& yum clean all \
 	&& echo -e "\n" >> /etc/profile \
-	&& echo 'export PATH="$PATH:/usr/local/php/bin:/usr/local/php/sbin"' >> /etc/profile
+	&& echo 'export PATH="$PATH:/usr/local/php/bin:/usr/local/php/sbin"' >> /etc/profile \
+	&& source /etc/profile
 
 EXPOSE 9000
 
