@@ -33,13 +33,17 @@ RUN yum -y install libxslt-devel libgeoip-dev \
     && make \
     && make install \
     && make clean \
-	&& mkdir /usr/local/nginx/conf/vhost \
+	&& mkdir /usr/local/nginx/conf/vhosts \
 	&& cd /usr/local/src/ \
 	&& rm -fr * \
 	&& yum clean all \
 	&& echo -e "\n" >> /etc/profile \
 	&& echo 'export PATH="$PATH:/usr/local/nginx/sbin"' >> /etc/profile \
 	&& source /etc/profile
+
+RUN yum install -y iputils \
+	&& yum install -y telnet \
+	&& yum clean all
 
 EXPOSE 80
 
