@@ -34,6 +34,7 @@ RUN yum -y install libxslt-devel libgeoip-dev \
     && make install \
     && make clean \
 	&& mkdir /usr/local/nginx/conf/vhosts \
+	&& sed -i "116,117s/^}$/    include vhosts\/*.conf;\n}/" /usr/local/nginx/conf/nginx.conf \
 	&& cd /usr/local/src/ \
 	&& rm -fr * \
 	&& yum clean all \

@@ -48,6 +48,7 @@ RUN yum update -y -y \
 	&& cd /usr/local/php/etc \
 	&& cp php-fpm.conf.default php-fpm.conf \
 	&& sed -i 's/;daemonize = yes/daemonize = no/' /usr/local/php/etc/php-fpm.conf \
+	&& sed -i 's/listen = 127.0.0.1:9000/listen = 0.0.0.0:9000/' /usr/local/php/etc/php-fpm.conf \
 	&& cd /usr/local/src/ \
 	&& wget https://pecl.php.net/get/memcache-2.2.7.tgz \
 	&& tar xf memcache-2.2.7.tgz \
