@@ -31,7 +31,7 @@ RUN yum update -y -y \
     && echo "/usr/local/lib" >> /etc/ld.so.conf.d/local.conf \
     && ldconfig -v \
 	&& cd ../php-$PHP_VERSION/ \
-    && ./configure --prefix=/usr/local/php --with-zlib-dir --with-freetype-dir --enable-mbstring --with-libxml-dir=/usr/local/libxml \
+    && ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-zlib-dir --with-freetype-dir --enable-mbstring --with-libxml-dir=/usr/local/libxml \
                    --enable-soap --enable-calendar --with-curl --with-mcrypt --with-zlib --with-gd --disable-rpath --enable-inline-optimization \
                    --with-bz2 --with-zlib --enable-sockets --enable-sysvsem --enable-sysvshm --enable-pcntl --with-ldap --enable-mbregex \
                    --enable-exif --enable-bcmath --with-mhash --enable-zip --with-pcre-regex --with-mysql --with-pdo-mysql --with-mysqli \
