@@ -18,6 +18,7 @@ RUN yum update -y -y \
     && yum install -y openldap-devel \
     && yum install -y postgresql-devel \
     && yum install -y libxslt-devel* \
+    && yum install -y libmemcached \
 	&& cd /usr/local/src/ \
 	&& wget http://cn2.php.net/distributions/php-$PHP_VERSION.tar.gz \
 	&& wget ftp://mcrypt.hellug.gr/pub/crypto/mcrypt/attic/libmcrypt/libmcrypt-2.5.7.tar.gz \
@@ -58,6 +59,50 @@ RUN yum update -y -y \
 	&& make \
 	&& make install \
 	&& make clean \
+	&& cd /usr/local/src \
+    && wget https://launchpad.net/libmemcached/1.0/1.0.18/+download/libmemcached-1.0.18.tar.gz \
+    && tar -zxvf libmemcached-1.0.18.tar.gz \
+    && cd libmemcached-1.0.18\
+    && ./configure --prefix=/usr/local/libmemcached \
+    && make \
+    && make install \
+    && make clean \
+    && cd /usr/local/src/ \
+    && wget https://pecl.php.net/get/memcached-2.2.0.tgz \
+    && tar xf memcached-2.2.0.tgz \
+    && cd memcached-2.2.0 \
+    && /usr/local/php/bin/phpize \
+    && ./configure --enable-memcached --with-libmemcached-dir=/usr/local/libmemcached --with-php-config=/usr/local/php/bin/php-config \
+    && make \
+    && make install \
+    && make clean \
+	&& cd /usr/local/src/ \
+    && wget https://pecl.php.net/get/xdebug-2.5.5.tgz \
+    && tar xf xdebug-2.5.5.tgz \
+    && cd xdebug-2.5.5 \
+    && /usr/local/php/bin/phpize \
+    && ./configure --enable-xdebug --with-php-config=/usr/local/php/bin/php-config \
+    && make \
+    && make install \
+    && make clean \
+    && cd /usr/local/src/ \
+    && wget https://pecl.php.net/get/igbinary-2.0.7.tgz \
+    && tar xf igbinary-2.0.7.tgz \
+    && cd igbinary-2.0.7 \
+    && /usr/local/php/bin/phpize \
+    && ./configure --enable-igbinary --with-php-config=/usr/local/php/bin/php-config \
+    && make \
+    && make install \
+    && make clean \
+    && cd /usr/local/src/ \
+    && wget https://pecl.php.net/get/redis-3.1.4.tgz \
+    && tar xf redis-3.1.4.tgz \
+    && cd redis-3.1.4 \
+    && /usr/local/php/bin/phpize \
+    && ./configure --enable-redis --with-php-config=/usr/local/php/bin/php-config \
+    && make \
+    && make install \
+    && make clean \
 	&& groupadd www \
     && useradd -g www www \
     && cp /usr/local/src/php-$PHP_VERSION/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm \
