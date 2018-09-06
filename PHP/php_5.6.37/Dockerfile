@@ -19,6 +19,7 @@ RUN yum update -y -y \
     && yum install -y postgresql-devel \
     && yum install -y libxslt-devel* \
     && yum install -y libmemcached \
+    && yum install -y telnet \
 	&& cd /usr/local/src/ \
 	&& wget http://cn2.php.net/distributions/php-$PHP_VERSION.tar.gz \
 	&& wget ftp://mcrypt.hellug.gr/pub/crypto/mcrypt/attic/libmcrypt/libmcrypt-2.5.7.tar.gz \
